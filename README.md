@@ -48,7 +48,7 @@ I strongly recommend you use of of two basic setups for
 learning kernel development:
 1. Use a Linux virtual machine (VM) that you have taken a snapshot of
   * That way you can revert to the snapshot if it gets hosed
-1. Use an embedded Linux system which boots of an SD card such as a Raspberry Pi
+2. Use an embedded Linux system which boots of an SD card such as a Raspberry Pi
   * Then if unbootable you can put the SD card in a card reader and fix the file
   system
 
