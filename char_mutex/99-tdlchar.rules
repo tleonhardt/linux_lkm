@@ -1,0 +1,2 @@
+#Rules file for the tdlchar device driver
+KERNEL=="tdlchar", SUBSYSTEM=="tdl", MODE="0666"
