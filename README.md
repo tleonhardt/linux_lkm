@@ -144,8 +144,8 @@ popd
 ## Attribution
 Much of the material here comes from the excellent book
 [Exploring Raspberry PI](http://exploringrpi.com/) by Derek Molloy.  If you want
-to learn more, I recommend you use that book as a reference.
-[Chapter 16](http://exploringrpi.com/chapter16/) covers **Kernel Programming**
+to learn more, I recommend you use that book as a reference to get started.
+[Chapter 16](http://exploringrpi.com/chapter16/) covers Kernel Programming.
 
-Unfortunately most of the detailed books on Linux kernel programming and driver
-development are pretty woefully out of date.
+A more detailed book specific to Linux kernel programming is
+[Linux Kernel Development, 3rd Ed](https://www.amazon.com/Linux-Kernel-Development-Robert-Love/dp/0672329468) by Robert Love.
