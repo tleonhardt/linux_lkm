@@ -41,20 +41,16 @@ the module is unloaded (no automatic cleanup)
 * LKMs have a higher level of execution privilege
 * LKMs do not have floating-point support
 
-<aside class="warning">
-It is very easy to crash the OS when you are writing and testing LKMs.  It is
+> It is very easy to crash the OS when you are writing and testing LKMs.  It is
 possible that you you can crash it in a way that could corrupt your file system
-and make it unbootable.  I strongly recommend you use of of two basic setups for
+and make it unbootable.
+I strongly recommend you use of of two basic setups for
 learning kernel development:
-
 1. Use a Linux virtual machine (VM) that you have taken a snapshot of
   * That way you can revert to the snapshot if it gets hosed
 1. Use an embedded Linux system which boots of an SD card such as a Raspberry Pi
   * Then if unbootable you can put the SD card in a card reader and fix the file
   system
-
-</aside>
-
 
 ## Prerequisites
 In order to build LKMs, the Linux kernel headers need to be installed on your build machine.  The Linux kernel headers are C header files that define the
@@ -142,8 +138,8 @@ cd parameters
 cat name
 popd
 ```
-NOTE: It is important that you leave any virtual filesystem directory associated with the LKM before you unload it, otherwise you can cause a kernel panic with something as simple as a call to ``ls``.
 
+> It is important that you leave any virtual filesystem directory associated with the LKM before you unload it, otherwise you can cause a kernel panic with something as simple as a call to ``ls``.
 
 ## Attribution
 Much of the material here comes from the excellent book
