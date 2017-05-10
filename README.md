@@ -52,6 +52,29 @@ learning kernel development:
   * Then if unbootable you can put the SD card in a card reader and fix the file
   system
 
+## Why Write LKMs
+### Performance
+With a stock Linux kernel and typical minimalist user-space configuration, pure user-space
+code may be able to reliably service an external event with a response time on the order
+of one eighth to one quarter of a millisecond (0.125 ms to 0.25 ms).  
+
+However, a stock Linux kernel can typically reliably service an interrupt-driven
+Kernel module with a response time of about 25 microseconds (25 us = 0.025ms), or 5
+to 10 times faster than user space.  This is for a stock Linux kernel, there are special
+real-time variants of Linux that can do significantly better.  
+
+But usually if you need better hard real-time performance than this, you should use a real-time co-processor of some sort (microcontroller, DSP, FPGA, etc.) that is running bare-metal with no OS.
+
+### Access to hardware
+To access hardware, you need some sort of kernel-mode driver, typically in the
+form of a LKM.  For all of your standard hardware, drivers exist.  But if
+you are manufacturing custom hardware, someone will need to write a driver.
+
+### Security applications
+Certain types of security-related code need to run in kernel space.  Things like
+rootkits, firewalls, and anti-virus products all need at least a kernel-mode
+component.
+
 ## Prerequisites
 In order to build LKMs, the Linux kernel headers need to be installed on your build machine.  The Linux kernel headers are C header files that define the
 interfaces between the different kernel modules, the kernel, and user space.  The header files present must be the exact same version as the kernel for which you want to build a module.
