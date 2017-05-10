@@ -21,8 +21,8 @@ The main purpose of this example is to demonstrate how a kernel-space LKM (**tdl
 can communicate with a user-space C/C++ application (**testtdlchar.c**).
 
 In this example, a C user-space application sends a string to the LKM. The LKM
-then responds with the message that was sent along with the number of letters
-that the sent message contains.
+then responds with the message that was sent, but with everything converted to
+uppercase.
 
 
 ## Where to learn more

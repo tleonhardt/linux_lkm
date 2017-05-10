@@ -17,12 +17,13 @@
 // 1) Fixed buffer size - can be fixed with appropriate dynamic allocation of memory
 // 2) Not multi-process/multi-thread safe - can be fixed with appropriate use of mutex
 
-#include <linux/init.h>           // Macros used to mark up functions e.g. __init __exit
+#include <linux/init.h>           // Macros used to mark up functions e.g. __init __exitf
 #include <linux/module.h>         // Core header for loading LKMs into the kernel
 #include <linux/device.h>         // Header to support the kernel Driver Model
-#include <linux/kernel.h>         // Contains types, macros, functions for the kernel, sprintf()
+#include <linux/kernel.h>         // Contains types, macros, functions for the kernel
 #include <linux/fs.h>             // Header for the Linux file system support
 #include <asm/uaccess.h>          // Required for the copy to user function
+
 #define  DEVICE_NAME "tdlchar"    ///< The device will appear at /dev/tdlchar using this value
 #define  CLASS_NAME  "tdl"        ///< The device class -- this is a character device driver
 
@@ -165,9 +166,24 @@ static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *of
    }
 }
 
+/** @brief Convert a character to upper case
+ * Straight forward implementation of toupper() in C since not available in kernel libs
+ * @param inChar A character
+ * @return returns the upper-case version of the input character
+ */
+static char toupper(const char inChar)
+{
+   char outChar = inChar;
+   if (inChar >= 'a' && inChar <= 'z')
+   {
+      outChar = inChar - ('a' - 'A');
+   }
+   return outChar;
+}
+
 /** @brief This function is called whenever the device is being written to from user space i.e.
  *  data is sent to the device from the user. The data is copied to the message[] array in this
- *  LKM using the sprintf() function along with the length of the string.
+ *  LKM but it is converted to all uppercase first.
  *  @param filep A pointer to a file object
  *  @param buffer The buffer to that contains the string to write to the device
  *  @param len The length of the array of data that is being passed in the const char buffer
@@ -175,7 +191,13 @@ static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *of
  */
 static ssize_t dev_write(struct file *filep, const char *buffer, size_t len, loff_t *offset)
 {
-   sprintf(message, "%s(%zu letters)", buffer, len);   // appending received string with its length
+   int i;
+   // Copy the buffer contents to our message buffer one byte at a time, converting to upper case
+   for( i = 0; i < len; i++)
+   {
+      message[i] = toupper(buffer[i]);
+   }
+   message[len] = '\0'; // ensure null terminated
    size_of_message = strlen(message);                 // store the length of the stored message
    printk(KERN_INFO "TDLChar: Received %zu characters from the user\n", len);
    return len;
