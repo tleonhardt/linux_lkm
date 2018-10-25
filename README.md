@@ -28,7 +28,7 @@ separate from the memory available in user space.  User space applications can
 access kernel services in a controlled way by making system calls via the Linux
 C library.
 
-Kernel modules are written in the C programming language, but they are not are
+Kernel modules are written in the C programming language, but they are
 a lot different from *normal* user-space C programs.  Some of the key differences
 include:
 
@@ -44,7 +44,7 @@ the module is unloaded (no automatic cleanup)
 > It is very easy to crash the OS when you are writing and testing LKMs.  It is
 possible that you you can crash it in a way that could corrupt your file system
 and make it unbootable.
-I strongly recommend you use of of two basic setups for
+I strongly recommend you use one of two basic setups for
 learning kernel development:
 1. Use a Linux virtual machine (VM) that you have taken a snapshot of
   * That way you can revert to the snapshot if it gets hosed

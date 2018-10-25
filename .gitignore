@@ -39,6 +39,11 @@
 *.symvers
 *.order
 
+# CLion IDE
+.idea
+
+# make cache
+.cache.mk
 
 
 
